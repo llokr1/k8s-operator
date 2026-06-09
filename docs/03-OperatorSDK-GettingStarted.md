@@ -198,7 +198,7 @@ manifests: controller-gen ## Generate WebhookConfiguration, ClusterRole and Cust
 	"$(CONTROLLER_GEN)" rbac:roleName=manager-role crd webhook paths="./..." output:crd:artifacts:config=config/crd/bases
 ```
 
-#### CRD의 기본 구조
+### CRD의 기본 구조
 
 생성된 CRD의 yaml 파일의 기본 구조는 아래와 같다.
 
