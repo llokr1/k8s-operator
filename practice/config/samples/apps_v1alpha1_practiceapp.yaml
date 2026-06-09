@@ -1,0 +1,8 @@
+apiVersion: apps.my.domain/v1alpha1
+kind: PracticeApp
+metadata:
+  name: practiceapp-sample
+spec:
+  image: nginx:latest
+  replicas: 2
+  port: 80

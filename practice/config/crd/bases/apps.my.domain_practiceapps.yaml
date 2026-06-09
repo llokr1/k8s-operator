@@ -1,0 +1,87 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: practiceapps.apps.my.domain
+spec:
+  group: apps.my.domain
+  names:
+    kind: PracticeApp
+    listKind: PracticeAppList
+    plural: practiceapps
+    singular: practiceapp
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.image
+      name: Image
+      type: string
+    - jsonPath: .spec.replicas
+      name: Replicas
+      type: integer
+    - jsonPath: .spec.port
+      name: Port
+      type: integer
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: PracticeApp is the Schema for the practiceapps API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: spec defines the desired state of PracticeApp
+            properties:
+              image:
+                description: 'image: 실행할 컨테이너 이미지'
+                type: string
+              port:
+                description: 'port: 컨테이너가 노출하는 포트 번호'
+                format: int32
+                type: integer
+              replicas:
+                description: 'replicas: 실행할 Pod 수'
+                format: int32
+                type: integer
+            required:
+            - image
+            - port
+            - replicas
+            type: object
+          status:
+            description: status defines the observed state of PracticeApp
+            properties:
+              message:
+                description: 'message: 현재 상태에 대한 설명'
+                type: string
+              phase:
+                description: 'phase: Controller가 판단한 현재 상태'
+                type: string
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

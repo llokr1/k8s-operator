@@ -1,0 +1,6 @@
+# Claude Code project settings
+docs/.claude/
+docs/architecture.html
+
+# IDE
+.idea/
